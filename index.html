@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te Amo ♡</title>
+    
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="fondo-borroso"></div>
+
+    <div class="capa-oscura"></div>
+
+    <div class="contenido-principal">
+        <h1 id="bienvenida">Para ti corazón <br> ♡ Say ♡</h1>
+        <h2 id="texto">
+            Mi niña hermosa, desde que llegaste a mi vida todo fue mucho mejor. Créeme que ni con todas las palabras del mundo alcanzaré a 
+            agradecértelo todo; aun así, toda la vida estaré feliz de hacerte saber y de demostrarte lo mucho que te amo.
+            Creo que el amor es un sentimiento muy lindo pero muy complejo. No basta con decir "te amo", no basta con prometer o decir cosas bonitas; 
+            hay que demostrarlo cada día, cada minuto, cada segundo, porque si de verdad lo sientes, no es difícil demostrarlo. Quiero que sepas que desde 
+            que te conocí, para mí eras alguien agradable; tu forma de ser me llamó la atención y, desde que nos hicimos mejores amigos, yo ya sabía que te 
+            quería para toda la vida. Te prometo que siempre has sido lo más importante para mí y siempre te he priorizado ante todo. Te prometo que,
+            siempre que necesites algo, buscaré cualquier forma de apoyarte, así como tú lo haces conmigo.
+            Quiero confesarte que a veces, al recordar el pasado, pienso que ya vivía enamorado de ti y solo no lo sabía. El día que me comencé a fijar en 
+            ti de otra forma me di cuenta de tantas cosas que, a pesar de haber sido tu amigo por 6 años, nunca había notado. Me sentía confundido, no sabía
+            si lo que estaba sintiendo era de verdad o por qué lo estaba sintiendo, pero era un sentimiento taaan lindo... Y hoy, cada vez que te beso,
+            cada vez que te abrazo, cada vez que estoy contigo o te veo a lo lejos venir hacia mí, lo vuelvo a sentir. TE AMO.
+        </h2>
+
+        
+    </div>
+
+    <div class="contenedor_img">
+        <img src="say_and_me.jpg" alt="">
+    </div>
+
+    <audio id="cancion-novia" src="suiza.mp3"></audio>
+
+<div class="reproductor-box">
+    <p class="track-title">♡ Suiza - Calle 24 ♡</p>
+    <p>¿porque esta cancion?</p>
+    <p>Pienso que con esta cancion comenzo todo, cuando me comenzaste a gustar cada que la escuchaba pensaba en ti y aun lo hago.</p>
+    <button id="btn-play" onclick="controlarMusica()">▶ Reproducir </button>
+</div>
+
+<script>
+    const musica = document.getElementById('cancion-novia');
+    const boton = document.getElementById('btn-play');
+
+    function controlarMusica() {
+        if (musica.paused) {
+            musica.play();
+            boton.innerHTML = "⏸️ Pausar";
+            boton.classList.add('playing');
+        } else {
+            musica.pause();
+            boton.innerHTML = "▶️ Reproducir";
+            boton.classList.remove('playing');
+        }
+    }
+</script>
+
+    <footer class="pie-pagina">
+    <p>© 20/06/2026 Ian. Todos los derechos reservados.</p>
+    <p class="version">v1.0.0</p>
+</footer>
+
+</body>
+</html>
