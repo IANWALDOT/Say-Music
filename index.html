@@ -2,18 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Te Amo ♡</title>
-    
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
     <div class="fondo-borroso"></div>
-
     <div class="capa-oscura"></div>
 
-    <div class="contenido-principal">
+    <div class="contenido-principal" id="contenedor-texto">
         <h1 id="bienvenida">Para ti corazón <br> ♡ Say ♡</h1>
         <h2 id="texto">
             Mi niña hermosa, desde que llegaste a mi vida todo fue mucho mejor. Créeme que ni con todas las palabras del mundo alcanzaré a 
@@ -28,26 +26,30 @@
             si lo que estaba sintiendo era de verdad o por qué lo estaba sintiendo, pero era un sentimiento taaan lindo... Y hoy, cada vez que te beso,
             cada vez que te abrazo, cada vez que estoy contigo o te veo a lo lejos venir hacia mí, lo vuelvo a sentir. TE AMO.
         </h2>
-
-        
     </div>
 
     <div class="contenedor_img">
-        <img src="say_and_me.jpg" alt="">
+        <img src="say_and_me.jpg" alt="Nosotros">
     </div>
 
     <audio id="cancion-novia" src="suiza.mp3"></audio>
 
-<div class="reproductor-box">
-    <p class="track-title">♡ Suiza - Calle 24 ♡</p>
-    <p>¿porque esta cancion?</p>
-    <p>Pienso que con esta cancion comenzo todo, cuando me comenzaste a gustar cada que la escuchaba pensaba en ti y aun lo hago.</p>
-    <button id="btn-play" onclick="controlarMusica()">▶ Reproducir </button>
-</div>
+    <div class="reproductor-box">
+        <p class="track-title">♡ Suiza - Calle 24 ♡</p>
+        <p>¿porque esta cancion?</p>
+        <p>Pienso que con esta cancion comenzo todo, cuando me comenzaste a gustar cada que la escuchaba pensaba en ti y aun lo hago.</p>
+        <button id="btn-play" onclick="controlarMusica()">▶ Reproducir </button>
+    </div>
+
+    <footer class="pie-pagina">
+        <p>© 20/06/2026 Ian. Todos los derechos reservados.</p>
+        <p class="version">v1.0.0</p>
+    </footer>
 
 <script>
     const musica = document.getElementById('cancion-novia');
     const boton = document.getElementById('btn-play');
+    const cajaTexto = document.getElementById('contenedor-texto');
 
     function controlarMusica() {
         if (musica.paused) {
@@ -60,12 +62,31 @@
             boton.classList.remove('playing');
         }
     }
-</script>
 
-    <footer class="pie-pagina">
-    <p>© 20/06/2026 Ian. Todos los derechos reservados.</p>
-    <p class="version">v1.0.0</p>
-</footer>
+    // --- TRANSFERENCIA DE SCROLL DE INERCIA ---
+    let inicioY = 0;
+
+    cajaTexto.addEventListener('touchstart', (e) => {
+        inicioY = e.touches[0].pageY;
+    }, { passive: true });
+
+    cajaTexto.addEventListener('touchmove', (e) => {
+        const actualY = e.touches[0].pageY;
+        const deltaY = inicioY - actualY; // Cuántos píxeles arrastra el dedo
+        
+        const scrollInterno = cajaTexto.scrollTop;
+        const maxScrollInterno = cajaTexto.scrollHeight - cajaTexto.clientHeight;
+
+        // Si arrastra para bajar la página pero el contenedor de texto ya llegó al fondo
+        if (deltaY > 0 && scrollInterno >= maxScrollInterno - 1) {
+            window.scrollBy(0, deltaY * 0.4); // Mueve la página principal directamente
+        }
+        // Si arrastra para subir la página pero el contenedor de texto ya llegó al inicio
+        else if (deltaY < 0 && scrollInterno <= 1) {
+            window.scrollBy(0, deltaY * 0.4); // Sube la página principal directamente
+        }
+    }, { passive: true });
+</script>
 
 </body>
 </html>

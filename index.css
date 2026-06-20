@@ -1,13 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 
-html, body {
+html {
     margin: 0;
     padding: 0;
-    height: 1300px; /* Mantiene el largo total de tu página original */
+    /* Usamos min-height para que la página siempre tenga como mínimo los 1300px, 
+       pero dinámicamente no colapse cuando las barras del cel aparezcan o desaparezcan */
+    min-height: 1300px; 
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
-    overflow: auto; 
+    /* Evita que el navegador detenga el scroll para recalcular tamaños */
+    scroll-behavior: auto !important; 
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 1300px;
+    width: 100%;
+    color: white;
+    /* Forzamos a que el renderizado táctil sea inmediato y continuo */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* --- CAPA 1: EL FONDO BORROSO --- */
@@ -37,26 +52,28 @@ html, body {
     z-index: -1; 
 }
 
-/* --- CAPA 3: TU CONTENEDOR CON SCROLL (CORREGIDO) --- */
+/* --- CAPA 3: TU CONTENEDOR CON SCROLL INTACTO --- */
 .contenido-principal {
     position: relative;
     z-index: 1;
-    margin: 1rem auto; /* Centrado horizontal automático */
-    margin-left: 1.2rem; /* Manteniendo tu margen izquierdo */
+    margin: 1rem auto; 
+    margin-left: 1.2rem; 
     border-radius: 10px;
     width: 90%;
-    height: 25rem; /* Tu altura original fija */
+    height: 25rem; /* Tus 25rem exactas de alto */
     border: solid 1px white;
     box-sizing: border-box;
     padding: 20px;
     text-align: center;
-    
-    /* === AQUÍ ESTABA EL PROBLEMA, SE CORRIGE ASÍ: === */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Fuerza a que el contenido empiece ARRIBA y no centrado */
-    overflow-y: auto;             /* Permite hacer scroll interno perfectamente */
+    justify-content: flex-start; 
+    overflow-y: auto;             
+
+    /* Evita que el contenedor principal afecte o se entere del scroll de la página de fondo */
+    overscroll-behavior-y: auto;
+    -webkit-overflow-scrolling: touch; 
 }
 
 /* Estilo para el título de Say */
@@ -70,13 +87,13 @@ html, body {
 
 /* Estilo para tu dedicatoria justificada */
 #texto {
-    font-family: 'Courier New', Courier, monospace; /* Tu fuente original */
+    font-family: 'Courier New', Courier, monospace; 
     font-size: 1.1rem;
     font-weight: normal; 
     line-height: 1.6;
     text-align: justify;
     width: 100%;
-    margin: 0; /* Quitamos márgenes que empujaban el texto */
+    margin: 0; 
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -96,7 +113,7 @@ html, body {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Evita que tu foto se estire feo dentro del contenedor */
+    object-fit: cover; 
 }
 
 /* --- ESTILOS DEL REPRODUCTOR DE MÚSICA --- */
@@ -152,7 +169,7 @@ html, body {
     margin-top: 40px;
     width: 100%;
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6); /* Color blanco semi-transparente para que sea discreto */
+    color: rgba(255, 255, 255, 0.6); 
     letter-spacing: 0.5px;
 }
 
